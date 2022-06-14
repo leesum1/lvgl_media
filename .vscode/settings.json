@@ -1,0 +1,28 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/leesum/lv_port_linux_frame_buffer",
+            "binaryPath": "/home/leesum/lv_port_linux_frame_buffer/RISCVdemo",
+            "binaryArgs": []
+        },
+        {
+            "cwd": "/home/leesum/lv_port_linux_frame_buffer",
+            "binaryPath": "/home/leesum/lv_port_linux_frame_buffer/demo",
+            "binaryArgs": []
+        }
+    ],
+    "files.associations": {
+        "Makefile": "makefile",
+        "time.h": "c",
+        "lv_drv_conf.h": "c",
+        "sunxifb.h": "c",
+        "fbdev.h": "c",
+        "g2d_driver_enh.h": "c",
+        "tslib.h": "c",
+        "evdev.h": "c",
+        "pthread.h": "c",
+        "lvgl.h": "c",
+        "hal.h": "c",
+        "lv_demos.h": "c"
+    }
+}

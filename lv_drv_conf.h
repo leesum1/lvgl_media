@@ -15,6 +15,13 @@
 
 #include "lv_conf.h"
 
+// leesum
+#define USE_SUNXIFB 0
+#define USE_SUNXIFB_G2D 0
+#define CONF_G2D_VERSION_NEW 0
+#define USE_SUNXIFB_CACHE 0
+//#define USE_SUNXIFB_G2D_ROTATE 1
+#define USE_SUNXIFB_DOUBLE_BUFFER 1
 /*********************
  * DELAY INTERFACE
  *********************/
@@ -431,7 +438,7 @@
 #if USE_LIBINPUT || USE_BSD_LIBINPUT
 /*If only a single device of the same type is connected, you can also auto detect it, e.g.:
  *#define LIBINPUT_NAME   libinput_find_dev(LIBINPUT_CAPABILITY_TOUCH, false)*/
-#  define LIBINPUT_NAME   "/dev/input/event0"        /*You can use the "evtest" Linux tool to get the list of devices and test them*/
+#  define LIBINPUT_NAME   "/dev/input/event2"        /*You can use the "evtest" Linux tool to get the list of devices and test them*/
 
 #endif  /*USE_LIBINPUT || USE_BSD_LIBINPUT*/
 
@@ -447,7 +454,7 @@
 #endif
 
 #if USE_EVDEV || USE_BSD_EVDEV
-#  define EVDEV_NAME   "/dev/input/event10"        /*You can use the "evtest" Linux tool to get the list of devices and test them*/
+#  define EVDEV_NAME   "/dev/input/event1"        /*You can use the "evtest" Linux tool to get the list of devices and test them*/
 #  define EVDEV_SWAP_AXES         0               /*Swap the x and y axes of the touchscreen*/
 
 #  define EVDEV_CALIBRATE         0               /*Scale and offset the touchscreen coordinates by using maximum and minimum values for each axis*/
