@@ -26,99 +26,100 @@
 #include <stdint.h>
 #include "HAL_Def.h"
 
-namespace HAL {
-    
-typedef bool (*CommitFunc_t)(void* info, void* userData);
-    
-void HAL_Init();
-void HAL_Update();
+namespace HAL
+{
 
-/* Backlight */
-void Backlight_Init();
-uint16_t Backlight_GetValue();
-void Backlight_SetValue(int16_t val);
-void Backlight_SetGradual(uint16_t target, uint16_t time = 500);
-void Backlight_ForceLit(bool en);
+    typedef bool (*CommitFunc_t)(void *info, void *userData);
 
-/* Display */
-void Display_Init();
-void Display_DumpCrashInfo(const char* info);
-void Display_SetAddrWindow(int16_t x0, int16_t y0, int16_t x1, int16_t y1);
-void Display_SendPixels(const uint16_t* pixels, uint32_t len);
-    
-typedef void(*Display_CallbackFunc_t)(void);
-void Display_SetSendFinishCallback(Display_CallbackFunc_t func);
-    
-/* FaultHandle */
-void FaultHandle_Init();
+    void HAL_Init();
+    void HAL_Update();
 
-/* I2C */
-int I2C_Scan();
+    /* Backlight */
+    void Backlight_Init();
+    uint16_t Backlight_GetValue();
+    void Backlight_SetValue(int16_t val);
+    void Backlight_SetGradual(uint16_t target, uint16_t time = 500);
+    void Backlight_ForceLit(bool en);
 
-/* IMU */
-bool IMU_Init();
-void IMU_SetCommitCallback(CommitFunc_t func, void* userData);
-void IMU_Update();
-    
-/* MAG */
-bool MAG_Init();
-void MAG_SetCommitCallback(CommitFunc_t func, void* userData);
-void MAG_Update();
+    /* Display */
+    void Display_Init();
+    void Display_DumpCrashInfo(const char *info);
+    void Display_SetAddrWindow(int16_t x0, int16_t y0, int16_t x1, int16_t y1);
+    void Display_SendPixels(const uint16_t *pixels, uint32_t len);
 
-/* SD */
-bool SD_Init();
-void SD_Update();
-bool SD_GetReady();
-float SD_GetCardSizeMB();
-const char* SD_GetTypeName();
-typedef void(*SD_CallbackFunction_t)(bool insert);
-void SD_SetEventCallback(SD_CallbackFunction_t callback);
+    typedef void (*Display_CallbackFunc_t)(void);
+    void Display_SetSendFinishCallback(Display_CallbackFunc_t func);
 
-/* Power */
-void Power_Init();
-void Power_HandleTimeUpdate();
-void Power_SetAutoLowPowerTimeout(uint16_t sec);
-uint16_t Power_GetAutoLowPowerTimeout();
-void Power_SetAutoLowPowerEnable(bool en);
-void Power_Shutdown();
-void Power_Update();
-void Power_EventMonitor();
-void Power_GetInfo(Power_Info_t* info);
-typedef void(*Power_CallbackFunction_t)(void);
-void Power_SetEventCallback(Power_CallbackFunction_t callback);
+    /* FaultHandle */
+    void FaultHandle_Init();
 
-/* Clock */
-void Clock_Init();
-void Clock_GetInfo(Clock_Info_t* info);
-void Clock_SetInfo(const Clock_Info_t* info);
-const char* Clock_GetWeekString(uint8_t week);
+    /* I2C */
+    int I2C_Scan();
 
-/* GPS */
-void GPS_Init();
-void GPS_Update();
-bool GPS_GetInfo(GPS_Info_t* info);
-bool GPS_LocationIsValid();
-double GPS_GetDistanceOffset(GPS_Info_t* info, double preLong, double preLat);
+    /* IMU */
+    bool IMU_Init();
+    void IMU_SetCommitCallback(CommitFunc_t func, void *userData);
+    void IMU_Update();
 
-/* Buzzer */
-void Buzz_init();
-void Buzz_SetEnable(bool en);
-void Buzz_Tone(uint32_t freq, int32_t duration = -1);
+    /* MAG */
+    bool MAG_Init();
+    void MAG_SetCommitCallback(CommitFunc_t func, void *userData);
+    void MAG_Update();
 
-/* Encoder */
-void Encoder_Init();
-void Encoder_Update();
-int32_t Encoder_GetDiff();
-bool Encoder_GetIsPush();
-void Encoder_SetEnable(bool en);
+    /* SD */
+    bool SD_Init();
+    void SD_Update();
+    bool SD_GetReady();
+    float SD_GetCardSizeMB();
+    const char *SD_GetTypeName();
+    typedef void (*SD_CallbackFunction_t)(bool insert);
+    void SD_SetEventCallback(SD_CallbackFunction_t callback);
 
-/* Audio */
-void Audio_Init();
-void Audio_Update();
-bool Audio_PlayMusic(const char* name);
+    /* Power */
+    void Power_Init();
+    void Power_HandleTimeUpdate();
+    void Power_SetAutoLowPowerTimeout(uint16_t sec);
+    uint16_t Power_GetAutoLowPowerTimeout();
+    void Power_SetAutoLowPowerEnable(bool en);
+    void Power_Shutdown();
+    void Power_Update();
+    void Power_EventMonitor();
+    void Power_GetInfo(Power_Info_t *info);
+    typedef void (*Power_CallbackFunction_t)(void);
+    void Power_SetEventCallback(Power_CallbackFunction_t callback);
 
-/* Memory */
-void Memory_DumpInfo();
+    /* Clock */
+    void Clock_Init();
+    void Clock_GetInfo(Clock_Info_t *info);
+    void Clock_SetInfo(const Clock_Info_t *info);
+    const char *Clock_GetWeekString(uint8_t week);
+
+    /* GPS */
+    void GPS_Init();
+    void GPS_Update();
+    bool GPS_GetInfo(GPS_Info_t *info);
+    bool GPS_LocationIsValid();
+    double GPS_GetDistanceOffset(GPS_Info_t *info, double preLong, double preLat);
+
+    /* Buzzer */
+    void Buzz_init();
+    void Buzz_SetEnable(bool en);
+    void Buzz_Tone(uint32_t freq, int32_t duration = -1);
+
+    /* Encoder */
+    void Encoder_Init();
+    void Encoder_Update();
+    int32_t Encoder_GetDiff();
+    bool Encoder_GetIsPush();
+    void Encoder_SetEnable(bool en);
+
+    /* Audio */
+    void Audio_Init();
+    void Audio_Update();
+    bool Audio_PlayMusic(const char *name);
+
+    /* Memory */
+    void Memory_DumpInfo();
 
 }
 

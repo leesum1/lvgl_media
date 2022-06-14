@@ -12,14 +12,19 @@
 
 #include "App.h"
 #include "Common/HAL/HAL.h"
-
+#include "player_int.h"
 #define DISP_BUF_SIZE (1920 * 1080)
 
 extern "C"
 {
     LV_IMG_DECLARE(mouse_cursor_icon); /*Declare the image file.*/
 }
-static void HALfbinit(void)
+const char *mp4add = "https://sf1-hscdn-tos.pstatp.com/obj/media-fe/xgplayer_doc_video/mp4/xgplayer-demo-720p.mp4";
+const char *rtspaddr = "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov";
+const char *cctv1addr = "http://39.134.115.163:8080/PLTV/88888910/224/3221225618/index.m3u8";
+
+static void
+HALfbinit(void)
 {
 #if USE_SUNXIFB
     uint32_t rotated = LV_DISP_ROT_NONE;
@@ -69,9 +74,10 @@ static void HALfbinit(void)
     disp_drv.flush_cb = fbdev_flush;
     disp_drv.hor_res = 1920;
     disp_drv.ver_res = 1080;
-
-    // disp_drv.full_refresh = 1;
+    disp_drv.screen_transp = 1;
     lv_disp_drv_register(&disp_drv);
+    lv_obj_set_style_bg_opa(lv_scr_act(), 0, 0);
+    lv_disp_set_bg_opa(NULL, LV_OPA_TRANSP);
 #endif
     evdev_init();
     int ret = evdev_set_file("/dev/input/event1");
@@ -90,8 +96,17 @@ static void HALfbinit(void)
 
     /*Set a cursor for the mouse*/
     lv_obj_t *cursor_obj = lv_img_create(lv_scr_act()); /*Create an image object for the cursor */
-    lv_img_set_src(cursor_obj, LV_SYMBOL_UP);           /*Set the image source*/
+    lv_img_set_src(cursor_obj, &mouse_cursor_icon);     /*Set the image source*/
     lv_indev_set_cursor(mouse_indev, cursor_obj);       /*Connect the image  object to the driver*/
+}
+
+void tplayertest1(void)
+{
+
+    tplayer_init(TPLAYER_VIDEO_ROTATE_DEGREE_0);
+    tplayer_play_url(cctv1addr);
+    tplayer_setlooping(1);
+    tplayer_play();
 }
 
 int main(int argc, const char *argv[])
@@ -102,10 +117,10 @@ int main(int argc, const char *argv[])
     /*Create a Demo*/
     // lv_demo_widgets();
     //   lv_demo_stress();
-    HAL::HAL_Init();
-    App_Init();
-    // lv_demo_benchmark();
-
+    // HAL::HAL_Init();
+    // App_Init();
+    //  lv_demo_benchmark();
+    tplayertest1();
     /*Handle LitlevGL tasks (tickless mode)*/
     LV_LOG_USER("disbuff:%d,%d", DISP_BUF_SIZE, USE_SUNXIFB);
     while (1)

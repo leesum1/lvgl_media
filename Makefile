@@ -18,20 +18,50 @@ WARNINGS_CFG ?= -Wall -Wextra \
 				-Wempty-body -Wshift-negative-value -Wstack-usage=4096 \
 				-Wtype-limits -Wsizeof-pointer-memaccess -Wpointer-arith
 
-# 头文件目录
-LIB_DIR = /home/leesum/tina-d1-h/out/d1-h-nezha/staging_dir/target/usr/lib/
-LIB_INC = /home/leesum/tina-d1-h/out/d1-h-nezha/staging_dir/target/usr/include/
 
+# 工程文件
 INCLUDE_CFG += -I$(LVGL_DIR)/  
 INCLUDE_CFG += -I$(PROJECT_DIR)/USER/App
 INCLUDE_CFG += -I$(PROJECT_DIR)/USER/App/src
-INCLUDE_CFG += -I$(PROJECT_DIR)/USER/App/Utils/ArduinoJson/src 
-INCLUDE_CFG += -I$(LIB_INC)
+INCLUDE_CFG += -I$(PROJECT_DIR)/USER/App/Utils/ArduinoJson/src
+# tina SDK 库文件
+INCLUDE_CFG += -I/home/leesum/tina-d1-h/out/d1-h-nezha/staging_dir/target/usr/include
+INCLUDE_CFG += -I/home/leesum/tina-d1-h/out/d1-h-nezha/staging_dir/target/usr/include/allwinner
+INCLUDE_CFG += -I/home/leesum/tina-d1-h/out/d1-h-nezha/staging_dir/target/usr/include/allwinner/include
+
+# tina SDK lib 文件
+LIB_DIR = /home/leesum/tina-d1-h/out/d1-h-nezha/staging_dir/target/usr/lib
+
+# tina tplayer 链接库
+TPLAYER_LIB :=  -ltplayer \
+			    -lxplayer \
+				-lvdecoder \
+				-ladecoder \
+				-lsubdecoder \
+				-lcdc_base \
+				-lVE \
+				-lMemAdapter \
+				-lcdx_parser \
+				-lcdx_playback \
+				-lcdx_stream \
+				-lcdx_base \
+				-lpthread \
+				-luapi \
+				-lz \
+				-lasound \
+				-lssl \
+				-lsbm \
+				-laftertreatment \
+				-lscaledown \
+				-lfbm \
+				-lvideoengine \
+				-lcdx_common \
+				-lcrypto \
 
 # 编译选项设置
 CFLAGS ?= -O3   $(INCLUDE_CFG) $(WARNING_CFG)
 CXXFLAGS ?= $(CFLAGS)
-LDFLAGS ?= -lm -lstdc++ -lts -lpthread  -L$(LIB_DIR)
+LDFLAGS ?= -lm -lstdc++ -lts  $(TPLAYER_LIB) -L$(LIB_DIR)
 
 BIN = demo
 

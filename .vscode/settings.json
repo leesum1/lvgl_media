@@ -23,6 +23,13 @@
         "pthread.h": "c",
         "lvgl.h": "c",
         "hal.h": "c",
-        "lv_demos.h": "c"
+        "lv_demos.h": "c",
+        "player_int.h": "c",
+        "select.h": "c",
+        "tplayer.h": "c",
+        "xplayer.h": "c",
+        "mediainfo.h": "c",
+        "player.h": "c",
+        "deinterlace.h": "c"
     }
 }
